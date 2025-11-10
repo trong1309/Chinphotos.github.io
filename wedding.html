@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cưới hỏi - Nessa K Photography</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #333;
+        }
+
+        .logo a {
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .logo a:hover {
+            color: #666;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #333;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        nav a:hover {
+            color: #666;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 180px 50px 80px;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Gallery Full */
+        .gallery-full {
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 20px;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 50px;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #333;
+            color: #fff;
+            font-size: 15px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .btn:hover {
+            background: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 50px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #666;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #333;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 25px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                gap: 20px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            .page-header {
+                padding: 140px 25px 60px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .gallery-full {
+                padding: 60px 25px;
+            }
+
+            .gallery-grid-full {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-section {
+                padding: 60px 25px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo"><a href="index.html">Nessa K</a></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="wedding.html">Cưới hỏi</a>
+            <a href="family.html">Gia đình</a>
+            <a href="about.html">Về tôi</a>
+            <a href="contact.html">Liên hệ</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Cưới hỏi</h1>
+        <p>Ghi lại những khoảnh khắc đẹp nhất trong ngày trọng đại của bạn</p>
+    </section>
+
+    <!-- Wedding Gallery -->
+    <section class="gallery-full">
+        <div class="gallery-grid-full">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop" alt="Wedding 1">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Hà Nội</h3>
+                    <p>Tháng 3, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=1000&fit=crop" alt="Wedding 2">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Đà Lạt</h3>
+                    <p>Tháng 2, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=1000&fit=crop" alt="Wedding 3">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Sài Gòn</h3>
+                    <p>Tháng 1, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&h=1000&fit=crop" alt="Wedding 4">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Phú Quốc</h3>
+                    <p>Tháng 12, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&h=1000&fit=crop" alt="Wedding 5">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Hội An</h3>
+                    <p>Tháng 11, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&h=1000&fit=crop" alt="Wedding 6">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Nha Trang</h3>
+                    <p>Tháng 10, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&h=1000&fit=crop" alt="Wedding 7">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Vũng Tàu</h3>
+                    <p>Tháng 9, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1000&fit=crop" alt="Wedding 8">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Huế</h3>
+                    <p>Tháng 8, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?w=800&h=1000&fit=crop" alt="Wedding 9">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Đà Nẵng</h3>
+                    <p>Tháng 7, 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Sẵn sàng đặt lịch chụp?</h2>
+        <p>Hãy liên hệ với tôi để bàn về ngày trọng đại của bạn</p>
+        <a href="contact.html" class="btn">Liên hệ ngay</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Nessa K Photography. Tất cả quyền được bảo lưu.</p>
+        <p>Hà Nội | TP. Hồ Chí Minh | Việt Nam</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

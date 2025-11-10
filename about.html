@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về tôi - Nessa K Photography</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #333;
+        }
+
+        .logo a {
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #333;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        nav a:hover {
+            color: #666;
+        }
+
+        /* About Content */
+        .about-content {
+            padding: 150px 50px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .about-text h1 {
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #222;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #333;
+            color: #fff;
+            font-size: 15px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-top: 20px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .btn:hover {
+            background: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 50px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #666;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #333;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #333;
+            margin: 3px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 25px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                gap: 20px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            .about-content {
+                padding: 120px 25px 60px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-text h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo"><a href="index.html">Nessa K</a></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="wedding.html">Cưới hỏi</a>
+            <a href="family.html">Gia đình</a>
+            <a href="about.html">Về tôi</a>
+            <a href="contact.html">Liên hệ</a>
+        </nav>
+    </header>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop" alt="Nessa K">
+            </div>
+            <div class="about-text">
+                <h1>Xin chào, tôi là Nessa K</h1>
+                <p>
+                    Tôi là một nhiếp ảnh gia chuyên nghiệp với hơn 10 năm kinh nghiệm trong ngành. Niềm đam mê của tôi là ghi lại những khoảnh khắc chân thực, đầy cảm xúc và kể những câu chuyện tình yêu qua từng bức ảnh.
+                </p>
+                <p>
+                    Xuất phát từ Hà Nội và hiện đang sinh sống tại TP. Hồ Chí Minh, tôi đã có cơ hội làm việc với hàng trăm cặp đôi và gia đình trên khắp Việt Nam. Mỗi buổi chụp đều là một cuộc phiêu lưu mới, một cơ hội để tôi được làm quen với những con người tuyệt vời và chia sẻ những khoảnh khắc đặc biệt nhất trong cuộc đời họ.
+                </p>
+                <p>
+                    Phong cách của tôi là sự kết hợp giữa nhiếp ảnh phóng sự và nghệ thuật, tập trung vào việc bắt giữ những cảm xúc tự nhiên và chân thực. Tôi tin rằng những bức ảnh đẹp nhất là những bức ảnh kể được câu chuyện.
+                </p>
+                <p>
+                    Ngoài nhiếp ảnh, tôi thích du lịch, đọc sách và dành thời gian với chú chó của mình. Tôi luôn sẵn sàng cho những cuộc phiêu lưu mới và rất mong được gặp bạn!
+                </p>
+                <a href="contact.html" class="btn">Làm việc cùng tôi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Nessa K Photography. Tất cả quyền được bảo lưu.</p>
+        <p>Hà Nội | TP. Hồ Chí Minh | Việt Nam</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
