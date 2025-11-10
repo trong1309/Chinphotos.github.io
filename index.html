@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ - Chinphotos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,10 +15,11 @@
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: #fff;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+            color: #2c2c2c;
             line-height: 1.8;
+            overflow-x: hidden;
         }
 
         a {
@@ -28,190 +32,328 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 25px 50px;
+            padding: 30px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #eee;
-            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         header.scrolled {
-            padding: 15px 50px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 20px 60px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.98);
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            color: #333;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #1a1a1a;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f4e4c1);
+            transition: width 0.3s ease;
+        }
+        
+        .logo:hover::after {
+            width: 100%;
         }
 
         .logo a {
-            color: #333;
+            color: #1a1a1a;
             transition: color 0.3s;
-        }
-
-        .logo a:hover {
-            color: #666;
         }
 
         nav {
             display: flex;
-            gap: 35px;
+            gap: 40px;
         }
 
         nav a {
-            color: #333;
+            color: #4a4a4a;
             font-size: 15px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f4e4c1);
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
-            color: #666;
+            color: #1a1a1a;
+        }
+        
+        nav a:hover::before {
+            width: 100%;
         }
 
         /* Hero Section */
         .hero {
-            padding: 180px 50px 80px;
-            max-width: 900px;
+            padding: 200px 60px 100px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-greeting {
-            font-size: 20px;
-            color: #999;
-            margin-bottom: 15px;
+            font-size: 18px;
+            color: #d4af37;
+            margin-bottom: 20px;
             font-style: italic;
+            font-weight: 500;
+            letter-spacing: 1px;
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .hero h1 {
-            font-size: 48px;
-            font-weight: 400;
-            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 600;
+            margin-bottom: 35px;
             line-height: 1.3;
-            color: #222;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .hero-intro {
-            font-size: 18px;
-            line-height: 1.9;
+            font-size: 19px;
+            line-height: 2;
             color: #555;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .hero-cta {
-            font-size: 18px;
-            color: #333;
-            font-weight: 500;
-            margin-top: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #2c2c2c;
+            font-weight: 600;
+            margin-top: 40px;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .hero-subtext {
             font-size: 16px;
-            color: #777;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
+            color: #666;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+            animation: fadeInUp 1s ease-out 0.8s both;
         }
 
         .hero-subtext a {
-            color: #333;
-            text-decoration: underline;
+            color: #d4af37;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
             transition: color 0.3s;
+        }
+        
+        .hero-subtext a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #d4af37;
+            transition: transform 0.3s;
         }
 
         .hero-subtext a:hover {
-            color: #666;
+            color: #b8941f;
+        }
+        
+        .hero-subtext a:hover::after {
+            transform: scaleX(1.1);
         }
 
         .location-info {
             font-size: 16px;
             color: #666;
-            line-height: 1.8;
-            margin-top: 20px;
+            line-height: 1.9;
+            margin-top: 30px;
+        }
+
+        .location-info a {
+            color: #d4af37;
+            font-weight: 500;
         }
 
         /* Services Section */
         .services {
-            padding: 80px 50px;
-            max-width: 1200px;
+            padding: 100px 60px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 60px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 70px;
+            margin-top: 60px;
         }
 
         .service-item {
             text-align: left;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37, #f4e4c1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-item:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
         }
 
         .service-number {
-            font-size: 48px;
-            color: #ddd;
-            font-weight: 300;
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            color: #f5f5f5;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1;
         }
 
         .service-item h3 {
-            font-size: 28px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: #222;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1a1a1a;
         }
 
         .service-item p {
             font-size: 16px;
             color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            line-height: 1.9;
+            margin-bottom: 20px;
         }
 
         .service-link {
-            display: inline-block;
-            color: #333;
+            display: inline-flex;
+            align-items: center;
+            color: #d4af37;
             font-size: 15px;
-            font-weight: 500;
-            margin-top: 10px;
-            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-link::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
         }
 
         .service-link:hover {
-            color: #666;
+            color: #b8941f;
+        }
+        
+        .service-link:hover::after {
             transform: translateX(5px);
         }
 
         /* Gallery Preview */
         .gallery-preview {
-            padding: 80px 50px;
-            max-width: 1400px;
+            padding: 100px 60px;
+            max-width: 1500px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 36px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: #222;
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, #f4e4c1);
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
         }
 
         .gallery-item {
@@ -219,77 +361,119 @@
             overflow: hidden;
             aspect-ratio: 3/4;
             cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         /* Quote Section */
         .quote-section {
-            padding: 100px 50px;
-            background: #fafafa;
+            padding: 120px 60px;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            position: relative;
+        }
+        
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
         }
 
         .quote-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
         }
 
         .quote-text {
-            font-size: 20px;
-            line-height: 1.9;
-            color: #555;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            line-height: 2;
+            color: #4a4a4a;
             font-style: italic;
             position: relative;
-            padding: 0 40px;
+            padding: 0 60px;
         }
 
         .quote-text::before {
             content: '"';
-            font-size: 80px;
-            color: #ddd;
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            color: #d4af37;
+            opacity: 0.2;
             position: absolute;
-            top: -30px;
+            top: -50px;
             left: 0;
+            line-height: 1;
         }
 
         /* Footer */
         footer {
-            padding: 60px 50px;
+            padding: 80px 60px 50px;
             text-align: center;
-            color: #999;
+            color: #888;
             font-size: 14px;
             border-top: 1px solid #eee;
+            background: #fafafa;
         }
 
         footer p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .social-links {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .social-links a {
             color: #666;
             font-size: 14px;
-            transition: color 0.3s;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid transparent;
         }
 
         .social-links a:hover {
-            color: #333;
+            color: #d4af37;
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
         }
 
         /* Mobile Menu */
@@ -305,12 +489,13 @@
             background: #333;
             margin: 3px 0;
             transition: 0.3s;
+            border-radius: 2px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             header {
-                padding: 20px 25px;
+                padding: 20px 30px;
             }
 
             .menu-toggle {
@@ -324,10 +509,10 @@
                 width: 100%;
                 background: #fff;
                 flex-direction: column;
-                padding: 30px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                padding: 40px 30px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.15);
                 transition: left 0.3s;
-                gap: 20px;
+                gap: 25px;
             }
 
             nav.active {
@@ -335,38 +520,50 @@
             }
 
             .hero {
-                padding: 140px 25px 60px;
+                padding: 160px 30px 80px;
             }
 
             .hero h1 {
-                font-size: 32px;
+                font-size: 36px;
+            }
+            
+            .hero-intro {
+                font-size: 17px;
             }
 
             .services {
-                padding: 60px 25px;
+                padding: 80px 30px;
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 50px;
+            }
+            
+            .service-item {
+                padding: 30px;
             }
 
             .gallery-preview {
-                padding: 60px 25px;
+                padding: 80px 30px;
             }
 
             .gallery-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
             }
 
             .quote-section {
-                padding: 60px 25px;
+                padding: 80px 30px;
             }
 
             .quote-text {
-                font-size: 17px;
-                padding: 0 20px;
+                font-size: 19px;
+                padding: 0 30px;
+            }
+            
+            .section-title {
+                font-size: 32px;
             }
         }
     </style>
@@ -417,7 +614,7 @@
                 <p>
                     Những câu chuyện về đám cưới lãng mạn và toàn bộ ngày trọng đại về những người đang yêu—dù dưới ánh nắng hay mưa, trong sân sau ấm cúng hay những trang trại rộng lớn, tôi theo dõi nơi tình yêu dẫn lối.
                 </p>
-                <a href="wedding.html" class="service-link">Xem thêm →</a>
+                <a href="wedding.html" class="service-link">Xem thêm</a>
             </div>
             <div class="service-item">
                 <div class="service-number">02</div>
@@ -425,7 +622,7 @@
                 <p>
                     Những câu chuyện thể hiện các gia đình và các buổi chụp kỷ niệm. Hãy mong đợi tình yêu, tiếng cười và một chút kỳ quặc.
                 </p>
-                <a href="family.html" class="service-link">Xem thêm →</a>
+                <a href="family.html" class="service-link">Xem thêm</a>
             </div>
             <div class="service-item">
                 <div class="service-number">03</div>
@@ -433,7 +630,7 @@
                 <p>
                     Trang giới thiệu là một khởi đầu tuyệt vời, nhưng đừng bỏ lỡ blog—nó đầy ắp ảnh du lịch, video kỳ quặc, những mẩu chuyện và một chút chia sẻ phù hợp.
                 </p>
-                <a href="about.html" class="service-link">Xem thêm →</a>
+                <a href="about.html" class="service-link">Xem thêm</a>
             </div>
         </div>
     </section>
