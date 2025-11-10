@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cưới hỏi - Chinphotos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+            color: #2c2c2c;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            padding: 20px 60px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #1a1a1a;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f4e4c1);
+            transition: width 0.3s ease;
+        }
+        
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .logo a {
+            color: #1a1a1a;
+            transition: color 0.3s;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #4a4a4a;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f4e4c1);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #1a1a1a;
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 200px 60px 100px;
+            text-align: center;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Gallery Section */
+        .gallery-full {
+            padding: 100px 60px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            padding: 35px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .gallery-overlay p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.85);
+            font-weight: 400;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+
+        .cta-section p {
+            font-size: 19px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 60px 50px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+
+        footer p {
+            margin-bottom: 12px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid transparent;
+        }
+
+        .social-links a:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 30px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 40px 30px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+                transition: left 0.3s;
+                gap: 25px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            .page-header {
+                padding: 160px 30px 80px;
+            }
+
+            .page-header h1 {
+                font-size: 38px;
+            }
+
+            .page-header p {
+                font-size: 17px;
+            }
+
+            .gallery-full {
+                padding: 80px 30px;
+            }
+
+            .gallery-grid-full {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .cta-section {
+                padding: 80px 30px;
+            }
+
+            .cta-section h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo"><a href="index.html">Chinphotos</a></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="kids.html">Trẻ em</a>
+            <a href="family.html">Gia đình</a>
+            <a href="about.html">Về tôi</a>
+            <a href="contact.html">Liên hệ</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Cưới hỏi</h1>
+        <p>Ghi lại những khoảnh khắc đẹp nhất trong ngày trọng đại của bạn - nơi tình yêu và hạnh phúc tỏa sáng</p>
+    </section>
+
+    <!-- Wedding Gallery -->
+    <section class="gallery-full">
+        <div class="gallery-grid-full">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop" alt="Wedding 1">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Hà Nội</h3>
+                    <p>Tháng 3, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=1000&fit=crop" alt="Wedding 2">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Đà Lạt</h3>
+                    <p>Tháng 2, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=1000&fit=crop" alt="Wedding 3">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Sài Gòn</h3>
+                    <p>Tháng 1, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&h=1000&fit=crop" alt="Wedding 4">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Phú Quốc</h3>
+                    <p>Tháng 12, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&h=1000&fit=crop" alt="Wedding 5">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Hội An</h3>
+                    <p>Tháng 11, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&h=1000&fit=crop" alt="Wedding 6">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Nha Trang</h3>
+                    <p>Tháng 10, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&h=1000&fit=crop" alt="Wedding 7">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Vũng Tàu</h3>
+                    <p>Tháng 9, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1000&fit=crop" alt="Wedding 8">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Huế</h3>
+                    <p>Tháng 8, 2023</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?w=800&h=1000&fit=crop" alt="Wedding 9">
+                <div class="gallery-overlay">
+                    <h3>Đám cưới Đà Nẵng</h3>
+                    <p>Tháng 7, 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Sẵn sàng đặt lịch chụp?</h2>
+        <p>Hãy liên hệ với tôi để bàn về buổi chụp của bạn và cùng tạo nên những kỷ niệm đẹp</p>
+        <a href="contact.html" class="btn">Liên hệ ngay</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Chinphotos. Tất cả quyền được bảo lưu.</p>
+        <p>TP. Hồ Chí Minh | Việt Nam</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
