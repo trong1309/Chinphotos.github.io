@@ -635,26 +635,27 @@
     <!-- Gallery Preview -->
     <section class="gallery-preview">
         <h2 class="section-title">Bộ sưu tập nổi bật</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop" alt="Wedding Photo 1">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=1000&fit=crop" alt="Wedding Photo 2">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=1000&fit=crop" alt="Wedding Photo 3">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&h=1000&fit=crop" alt="Family Photo 1">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1000&fit=crop" alt="Family Photo 2">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&h=1000&fit=crop" alt="Family Photo 3">
-            </div>
-        </div>
+        <div class="gallery-grid" id="gallery"></div>
+
+<script>
+fetch('gallery.json')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("gallery");
+
+    data.gallery.forEach(path => {
+      const div = document.createElement("div");
+      div.className = "gallery-item";
+
+      const img = document.createElement("img");
+      img.src = path;
+
+      div.appendChild(img);
+      container.appendChild(div);
+    });
+  });
+</script>
+
     </section>
 
     <!-- Quote Section -->
@@ -705,5 +706,4 @@
     </script>
 </body>
 </html>
-
 
